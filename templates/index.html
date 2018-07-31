@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="es" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <title>Tarea 1</title>
+  </head>
+  <body>
+    <ul class="nav">
+      <li class="nav-item">
+        <a class="nav-link active" href="/">Buscador</a>
+      </li>
+    </ul>
+    <div class="container">
+    <h1 class="text-center ">Lugares Turísticos de Ecuador</h1>
+      <form method="post" role="form" class="mx-auto" style="margin-top: 1.5em;">
+        {{ form.csrf }}
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            {{form.query(class="form-control",placeholder="Ingrese ciudad, provincia o tipo de lugar turístico...")}}
+          </div>
+          <div class="form-group col-md-4">
+            {{ form.opcion(class="form-control")}}
+          </div>
+          <div class="form-group col-md-2">
+            <button type="submit" class="btn btn-primary">Buscar</button>
+          </div>
+        </div>
+      </form>
+      {% if data %}
+      <span class="badge badge-primary ">Número de coincidencias: {{long}}</span>
+      <div style="margin-top: 1.5em;">
+          <table class="table">
+            <tr>
+              <th>Nombre</th>
+              <th>Tipo Lugar</th>
+              <th>Provincia</th>
+              <th>Ciudad</th>
+              <th>Localizacion</th>
+            </tr>
+            {% for d in data %}
+            <tr>
+              <td>{{d['Nombre']}}</td>
+              <td>{{d['Tipolugar']}}</td>
+              <td>{{d['Provincia']}}</td>
+              <td>{{d['Ciudad']}}</td>
+              <td>{{d['Localizacion']}}</td>
+            </tr>
+            {% endfor %}
+          </table>
+      </div>
+      {% endif %}
+    </body>
+  </div>
+  <footer class="bg-light" style="position: fixed; left: 0; bottom: 0; width: 100%;">
+    <div class="footer-copyright text-center py-3">© 2018 Copyright:
+      <a href="https://www.facebook.com/pedrosalinassagbay"> @pedrojsalinas</a>
+    </div>
+  </footer>
+</html>
